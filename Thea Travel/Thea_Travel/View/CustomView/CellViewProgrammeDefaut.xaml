@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell  xmlns="http://xamarin.com/schemas/2014/forms"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           x:Class="Thea_Travel.View.CustomView.CellViewProgrammeDefaut" x:Name="root" Appearing="root_Appearing">
+    <StackLayout x:Name="stack">
+        <Label Text="{Binding ProgrammeType}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="30"/>
+        <BoxView BackgroundColor="Gray" HeightRequest="2"/>
+        <Label Margin=" 25, 10, 25, 10"  Text="{Binding Model.Information}" LineBreakMode="WordWrap"/>
+        <BoxView BackgroundColor="Black" HeightRequest="2"/>
+    </StackLayout>
+</ViewCell>

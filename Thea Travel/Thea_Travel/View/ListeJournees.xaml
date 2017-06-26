@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Thea_Travel.View.ListeJournees"
+             xmlns:local="clr-namespace:Thea_Travel.View"
+             xmlns:views="clr-namespace:Thea_Travel.View.CustomView"
+             NavigationPage.HasNavigationBar="True">    
+    <RelativeLayout>
+        <Image Source="logothea.jpg"
+               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
+               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0}"
+               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
+               BackgroundColor="White"/>
+        <ListView x:Name="listViewJournees" ItemsSource="{Binding Journées}" ItemSelected="ListView_ItemSelected" HasUnevenRows="True"
+               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
+               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
+               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.50}"
+               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}">
+            <ListView.Header>
+                <Label HorizontalTextAlignment="Center" Text="Liste journées" />
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <views:CellViewJournées DateCell="{Binding Model.DateDuJour}" IndexCell="{Binding Index}" Appearing="CellViewJournées_Appearing"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView x:Name="listViewAddresses" ItemsSource="{Binding Feuille.Adresses}" ItemSelected="ListView_ItemSelected" HasUnevenRows="True"
+               RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}"
+               RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
+               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.50}"
+               RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}">
+            <ListView.Header>
+                <Label HorizontalTextAlignment="Center" Text="Adresses utiles" />
+            </ListView.Header>
+        </ListView>
+
+    </RelativeLayout>
+</ContentPage>

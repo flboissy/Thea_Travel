@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          x:Class="Thea_Travel.View.CustomView.CellViewJournées" 
+          x:Name="root"
+          >
+    <Grid x:Name="myGrid"  BindingContext="{x:Reference root}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="2"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"  Text="{Binding DateCell,  StringFormat='{0:d}'}" x:Name="LabelDebut" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+        <BoxView Grid.Row="1" BackgroundColor="Black" HeightRequest="2"/>
+    </Grid>
+</ViewCell>
