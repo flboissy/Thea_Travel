@@ -6,13 +6,12 @@ namespace Thea_Travel.Data
 {
     public class Journée : BindableObject, IJournée
     {
-        public static readonly BindableProperty DateDuJourProperty =
-        BindableProperty.Create("DateDuJour", typeof(DateTime), typeof(Journée), DateTime.Today); 
         public DateTime DateDuJour
         {
-            get { return (DateTime)GetValue(DateDuJourProperty); }
-            set { SetValue(DateDuJourProperty, value); }
+            get { return dateDuJour; }
+            set { dateDuJour = value; }
         }
+        private DateTime dateDuJour;
         public IEnumerable<IProgramme> Programmes => programmes;
         private List<IProgramme> programmes = new List<IProgramme>();
         public void ajouterProgramme(IProgramme p)

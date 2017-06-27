@@ -7,14 +7,19 @@ using Thea_Travel.Data.Interface;
 
 namespace Thea_Travel.Data
 {
-    class ListeAdressesUtiles
+    public class ListeAdressesUtiles
     {
+        public ListeAdressesUtiles()
+        {
+            adresses = new List<IAdresseUtile>();
+        }
+
         public IEnumerable<IAdresseUtile> Adresses => adresses;
         private List<IAdresseUtile> adresses;
 
-        async public Task initAdressesUtiles()
+        public void Add(IAdresseUtile addr)
         {
-
+            adresses.Add(addr);
         }
     }
 }

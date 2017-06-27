@@ -1,39 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using Thea_Travel.Data.Interface;
 using Xamarin.Forms;
 
 namespace Thea_Travel.Data
 {
     class FeuilleDeRoute : BindableObject, IFeuilleDeRoute
     {
-        public static readonly BindableProperty DebutProperty =
-        BindableProperty.Create("Debut", typeof(DateTime), typeof(FeuilleDeRoute), DateTime.Today);
         public DateTime Debut
         {
-            get { return (DateTime)GetValue(DebutProperty); }
-            set { SetValue(DebutProperty, value); }
+            get { return debut; }
+            set { debut = value; }
         }
-        public static readonly BindableProperty FinProperty =
-        BindableProperty.Create("Fin", typeof(DateTime), typeof(FeuilleDeRoute), DateTime.Today);
+        private DateTime debut;
+
         public DateTime Fin
         {
-            get { return (DateTime)GetValue(FinProperty); }
-            set { SetValue(FinProperty, value); }
+            get { return fin; }
+            set { fin = value; }
         }
-        public static readonly BindableProperty IDProperty =
-        BindableProperty.Create("ID", typeof(string), typeof(FeuilleDeRoute), "ID");
+        private DateTime fin;
         public string ID
         {
-            get { return (string)GetValue(IDProperty); }
-            set { SetValue(IDProperty, value); }
+            get { return id; }
+            set { id = value; }
         }
-        public static readonly BindableProperty TitreProperty =
-        BindableProperty.Create("Titre", typeof(string), typeof(FeuilleDeRoute), "Feuille de route");
+        private string id;
         public string Titre
         {
-            get { return (string)GetValue(TitreProperty); }
-            set { SetValue(TitreProperty, value); }
+            get { return titre; }
+            set { titre = value; }
         }
+        private string titre;
         public List<IJournée> Journées => journées;
         private List<IJournée> journées = new List<IJournée>();
 
@@ -45,19 +43,19 @@ namespace Thea_Travel.Data
         {
             journées.Add(j);
         }
+
         public IVoyageur Voyageur { get; set; }
 
-        public IEnumerable<string> Adresses
-        {
-            get { return adresses; }
-        }
-        private List<string> adresses = new List<string>();
+        public ListeAdressesUtiles Adresses { get; }
 
-        public void ajouterAdresse(string addr)
+        public void ajouterAdresse(IAdresseUtile addr)
         {
-            adresses.Add(addr);
+            Adresses.Add(addr);
         }
 
-        public FeuilleDeRoute() { }
+        public FeuilleDeRoute()
+        {
+            Adresses = new ListeAdressesUtiles();
+        }
     }
 }

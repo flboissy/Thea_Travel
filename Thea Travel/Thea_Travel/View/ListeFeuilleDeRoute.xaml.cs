@@ -24,7 +24,6 @@ namespace Thea_Travel.View
             BindingContext = this;
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, true);
-            NavigationPage.SetBackButtonTitle(this, "Feuille(s) de route");
         }
         private async void Selectionner_Feuille_De_Route(object sender, SelectedItemChangedEventArgs e)
         {
@@ -55,10 +54,6 @@ namespace Thea_Travel.View
                 }
             }
             isPairRow = !isPairRow;
-        }
-        private async void LogoThea_Tapped(object sender, EventArgs e)
-        {
-            
         }
     }
 }

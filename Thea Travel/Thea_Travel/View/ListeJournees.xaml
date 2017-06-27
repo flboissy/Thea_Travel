@@ -12,13 +12,12 @@
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
                BackgroundColor="White"/>
-        <ListView x:Name="listViewJournees" ItemsSource="{Binding Journées}" ItemSelected="ListView_ItemSelected" HasUnevenRows="True"
+        <ListView x:Name="listViewJournees" ItemsSource="{Binding Journées}" ItemSelected="ListView_ItemSelected" HasUnevenRows="True" SeparatorColor="Black"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
-               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.50}"
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}">
             <ListView.Header>
-                <Label HorizontalTextAlignment="Center" Text="Liste journées" />
+                <Label BackgroundColor="Gray" TextColor="Black" HorizontalTextAlignment="Center" Text="Liste journées" />
             </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -27,14 +26,18 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="listViewAddresses" ItemsSource="{Binding Feuille.Adresses}" ItemSelected="ListView_ItemSelected" HasUnevenRows="True"
+        <ListView x:Name="listViewAddresses" ItemsSource="{Binding Adresses}" ItemSelected="listViewAddresses_ItemSelected" HasUnevenRows="True" SeparatorColor="Black"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}"
                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
-               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.50}"
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}">
             <ListView.Header>
-                <Label HorizontalTextAlignment="Center" Text="Adresses utiles" />
+                <Label BackgroundColor="Gray" TextColor="Black" HorizontalTextAlignment="Center" Text="Adresses utiles" />
             </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <views:CellViewAdresse NomCell="{Binding Nom}" AdresseCell="{Binding Adresse}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
 
     </RelativeLayout>

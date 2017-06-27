@@ -12,9 +12,6 @@
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
                BackgroundColor="White">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Tapped="LogoThea_Tapped"/>
-            </Image.GestureRecognizers>
         </Image>
         <ListView x:Name="listViewFeuilles" ItemsSource="{Binding Feuilles}"  CachingStrategy="RecycleElement" ItemSelected="Selectionner_Feuille_De_Route" SeparatorColor="Black" SeparatorVisibility="Default" HasUnevenRows="True"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"

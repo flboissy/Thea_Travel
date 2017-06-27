@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Thea_Travel.Data.Interface;
 
 namespace Thea_Travel.Data
 {
@@ -16,8 +17,8 @@ namespace Thea_Travel.Data
         string ID { get; set; }
         IVoyageur Voyageur { get; set; }
         List<IJournée> Journées { get; }
-        IEnumerable<string> Adresses { get; }
+        ListeAdressesUtiles Adresses { get; }
         void ajouterJournée(IJournée j);
-        void ajouterAdresse(string addr);
+        void ajouterAdresse(IAdresseUtile addr);
     }
 }

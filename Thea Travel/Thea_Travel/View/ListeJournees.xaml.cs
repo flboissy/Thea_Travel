@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using Thea_Travel.Data;
+using Thea_Travel.Data.Interface;
 using Thea_Travel.View.CustomView;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,10 +14,12 @@ namespace Thea_Travel.View
     {
         private IFeuilleDeRoute Feuille { get; set; }
         public ObservableCollection<JournéeViewModel> Journées { get; set; }
+        public ObservableCollection<IAdresseUtile> Adresses { get; set; }
         public ListeJournees(IFeuilleDeRoute f)
         {           
             Feuille = f;
-            Journées = new ObservableCollection<JournéeViewModel>(Feuille.Journées.Select(elt => new JournéeViewModel(Feuille.Journées.IndexOf(elt),elt))) ;  
+            Journées = new ObservableCollection<JournéeViewModel>(Feuille.Journées.Select(elt => new JournéeViewModel(Feuille.Journées.IndexOf(elt),elt))) ;
+            Adresses = new ObservableCollection<IAdresseUtile>(Feuille.Adresses.Adresses);
             BindingContext = this;
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, true);
@@ -35,7 +39,7 @@ namespace Thea_Travel.View
             }
 
             JournéeViewModel j = e.SelectedItem as JournéeViewModel;
-            await Navigation.PushModalAsync(new ListeProgrammes(j.Model));
+            await Navigation.PushAsync(new ListeProgrammes(j.Model));
             listViewJournees.SelectedItem = null;
         }
 
@@ -46,6 +50,30 @@ namespace Thea_Travel.View
             {
                 viewCell.View.BackgroundColor = Color.FromHex("#c7dae0");
             }
+        }
+
+        private async void listViewAddresses_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var addr = e.SelectedItem as AdresseUtile;
+            if(addr == null)
+            {
+                return;
+            }
+
+            var action = await DisplayActionSheet("Que souhaitez vous faire ?", "Retour", null, ListeProgrammes.CHOIX_MAP);
+            if(action == ListeProgrammes.CHOIX_MAP)
+            {
+                switch (Device.OS)
+                {
+                    case TargetPlatform.iOS:
+                        Device.OpenUri(new Uri(string.Format("http://maps.apple.com/?q={0}", WebUtility.UrlEncode(addr.Adresse))));
+                        break;
+                    case TargetPlatform.Android:
+                        Device.OpenUri(new Uri(string.Format("geo:0,0?q={0}", WebUtility.UrlEncode(addr.Adresse))));
+                        break;
+                }
+            }
+            listViewAddresses.SelectedItem = null;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Thea_Travel.View
     public partial class ListeProgrammes : ContentPage
     {
         private static readonly string CHOIX_APPELER = "Appeler";
-        private static readonly string CHOIX_MAP = "Itinéraire";
+        public static readonly string CHOIX_MAP = "Itinéraire";
         public static readonly string IS_PAIR_KEY = "PairKey";
         IJournée Journée;
         public ObservableCollection<ProgrammeViewModel> Programmes { get; set; }
@@ -21,6 +21,10 @@ namespace Thea_Travel.View
             Programmes = new ObservableCollection<ProgrammeViewModel>(Journée.Programmes.Select(elt => new ProgrammeViewModel(elt)).ToList());
             BindingContext = this;
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, true);
+            NavigationPage.SetHasBackButton(this, true);
+            Title = "Journée du " + String.Format("{0:d}", Journée.DateDuJour);
+
             if (!App.Current.Properties.ContainsKey(IS_PAIR_KEY))
             {
                 App.Current.Properties.Add(IS_PAIR_KEY, true);

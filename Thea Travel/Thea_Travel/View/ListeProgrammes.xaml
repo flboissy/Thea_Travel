@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             	
+             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              x:Class="Thea_Travel.View.ListeProgrammes"
-             xmlns:local ="clr-namespace:Thea_Travel;assembly=Thea_Travel">
+             xmlns:local ="clr-namespace:Thea_Travel;assembly=Thea_Travel"
+             NavigationPage.HasNavigationBar="True">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:ProgrammeDataTemplateSelector x:Key="ProgrammeTemplateSelector"></local:ProgrammeDataTemplateSelector>

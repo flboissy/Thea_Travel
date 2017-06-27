@@ -12,6 +12,7 @@ using System.Globalization;
 using System.Xml.Linq;
 using System.Net;
 using Thea_Travel.Ressources;
+using Thea_Travel.Data.Interface;
 
 namespace Thea_Travel.Manager
 {
@@ -39,7 +40,7 @@ namespace Thea_Travel.Manager
         {
             IFeuilleDeRoute feuille = new FeuilleDeRoute();
             IEnumerable<IJournée> journees;
-            IEnumerable<string> adresses;
+            IEnumerable<IAdresseUtile> adresses;
             JObject json = JObject.Parse(httpResult);
 
             feuille.Titre = (string)json[HttpHelper.CHAMP_TITRE];
@@ -57,7 +58,7 @@ namespace Thea_Travel.Manager
                 feuille.ajouterJournée(j);
             }
 
-            foreach (string addr in adresses)
+            foreach (IAdresseUtile addr in adresses)
             {
                 feuille.ajouterAdresse(addr);
             }
@@ -65,9 +66,15 @@ namespace Thea_Travel.Manager
             return feuille;
         }
 
-        private IEnumerable<string> resultToAdresses(XDocument result)
+        private IEnumerable<IAdresseUtile> resultToAdresses(XDocument result)
         {
-            return result.Descendants("Item").Select(elt => elt.Element(HttpHelper.CHAMP_ADRESSE).Value).ToList();
+            return result.Descendants("Item").Select(elt => resultToOneAdresse(elt)).ToList();
+        }
+
+        private IAdresseUtile resultToOneAdresse(XElement result)
+        {
+            IAdresseUtile addr = new AdresseUtile(result.Element(HttpHelper.CHAMP_NOM_ADRESSE).Value, result.Element(HttpHelper.CHAMP_ADRESSE).Value);
+            return addr;
         }
 
         public IEnumerable<IJournée> resultToJournees(XDocument result)
