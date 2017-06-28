@@ -19,5 +19,10 @@ namespace Thea_Travel.Data
         {
             return base.ToString();
         }
+
+        public async Task ActionSheet()
+        {
+
+        }
     }
 }

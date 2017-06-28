@@ -12,7 +12,7 @@
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
                BackgroundColor="White"/>
-        <ListView x:Name="listViewJournees" ItemsSource="{Binding Journées}" ItemSelected="ListView_ItemSelected" HasUnevenRows="True" SeparatorColor="Black"
+        <ListView x:Name="listViewJournees" ItemsSource="{Binding LesJournéesVM}" ItemTapped="listViewJournees_ItemTapped"  HasUnevenRows="True" SeparatorColor="Black"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}">
@@ -26,7 +26,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView x:Name="listViewAddresses" ItemsSource="{Binding Adresses}" ItemSelected="listViewAddresses_ItemSelected" HasUnevenRows="True" SeparatorColor="Black"
+        <ListView x:Name="listViewAddresses" ItemsSource="{Binding AdressesVM.LesAddressesVM }" ItemSelected="listViewAddresses_ItemSelected" HasUnevenRows="True" SeparatorColor="Black"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}"
                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.50}">

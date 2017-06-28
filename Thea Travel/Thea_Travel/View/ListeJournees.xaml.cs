@@ -5,6 +5,7 @@ using System.Net;
 using Thea_Travel.Data;
 using Thea_Travel.Data.Interface;
 using Thea_Travel.View.CustomView;
+using Thea_Travel.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,37 +13,22 @@ namespace Thea_Travel.View
 {
     public partial class ListeJournees : ContentPage
     {
-        private IFeuilleDeRoute Feuille { get; set; }
-        public ObservableCollection<JournéeViewModel> Journées { get; set; }
-        public ObservableCollection<IAdresseUtile> Adresses { get; set; }
-        public ListeJournees(IFeuilleDeRoute f)
-        {           
-            Feuille = f;
-            Journées = new ObservableCollection<JournéeViewModel>(Feuille.Journées.Select(elt => new JournéeViewModel(Feuille.Journées.IndexOf(elt),elt))) ;
-            Adresses = new ObservableCollection<IAdresseUtile>(Feuille.Adresses.Adresses);
-            BindingContext = this;
+
+        FeuilleDeRouteViewModel CurrentFeuille { get; set; }
+        AppManagerViewModel Manager { get; set; }
+        public ListeJournees(AppManagerViewModel m)
+        {
+            Manager = m;
+            CurrentFeuille = Manager.FeuillesVM.SelectedFeuille;
+            BindingContext = CurrentFeuille;
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, true);
-            Title = f.Titre;
+            Title = Manager.FeuillesVM.SelectedFeuille.Titre;
         }
         protected override void OnAppearing()
         {   
             base.OnAppearing();
         }
-
-        private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            
-            if (e.SelectedItem == null)
-            {
-                return;
-            }
-
-            JournéeViewModel j = e.SelectedItem as JournéeViewModel;
-            await Navigation.PushAsync(new ListeProgrammes(j.Model));
-            listViewJournees.SelectedItem = null;
-        }
-
         private void CellViewJournées_Appearing(object sender, EventArgs e)
         {           
             CellViewJournées viewCell = sender as CellViewJournées;  
@@ -60,8 +46,8 @@ namespace Thea_Travel.View
                 return;
             }
 
-            var action = await DisplayActionSheet("Que souhaitez vous faire ?", "Retour", null, ListeProgrammes.CHOIX_MAP);
-            if(action == ListeProgrammes.CHOIX_MAP)
+            var action = await DisplayActionSheet("Que souhaitez vous faire ?", "Retour", null, AppManagerViewModel.CHOIX_MAP);
+            if(action == AppManagerViewModel.CHOIX_MAP)
             {
                 switch (Device.OS)
                 {
@@ -74,6 +60,18 @@ namespace Thea_Travel.View
                 }
             }
             listViewAddresses.SelectedItem = null;
+        }
+
+        private void listViewJournees_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            listViewJournees.ItemTapped -= listViewJournees_ItemTapped;
+            if(e.Item == null)
+            {
+                return;
+            }
+            CurrentFeuille.SelectedIndex = CurrentFeuille.LesJournéesVM.IndexOf(e.Item as JournéeViewModel);
+            Navigation.PushAsync(new ListeProgrammes(Manager));
+            listViewJournees.ItemTapped += listViewJournees_ItemTapped;
         }
     }
 }

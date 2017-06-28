@@ -2,12 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             	
              xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:behavior="clr-namespace:Thea_Travel.Behavior"
+             xmlns:conv="clr-namespace:Thea_Travel.Converters"
              x:Class="Thea_Travel.View.ListeProgrammes"
              xmlns:local ="clr-namespace:Thea_Travel;assembly=Thea_Travel"
              NavigationPage.HasNavigationBar="True">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:ProgrammeDataTemplateSelector x:Key="ProgrammeTemplateSelector"></local:ProgrammeDataTemplateSelector>
+            <conv:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <RelativeLayout>
@@ -17,10 +20,14 @@
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
                BackgroundColor="White"/>
-        <ListView x:Name="listViewProgrammes" ItemsSource="{Binding Programmes}" ItemTemplate="{StaticResource ProgrammeTemplateSelector}" ItemSelected="listView_ItemSelected" SeparatorColor="Black" HasUnevenRows="True"
+        <ListView x:Name="listViewProgrammes" ItemsSource="{Binding LesProgrammesVM}" ItemTemplate="{StaticResource ProgrammeTemplateSelector}" SeparatorColor="Black" HasUnevenRows="True"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}" 
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.75}"/>
+               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.75}">
+            <ListView.Behaviors>
+                <behavior:ListViewItemSelectedBehavior Command="{Binding ItemSelectedCommand}" Converter="{StaticResource SelectedItemConverter}"/>
+            </ListView.Behaviors>
+        </ListView>
     </RelativeLayout>
 </ContentPage>

@@ -7,13 +7,14 @@ using Thea_Travel.Manager.DataManager;
 using System.Threading.Tasks;
 using System.Net;
 using Thea_Travel.Ressources;
+using Thea_Travel.ViewModel;
 
 namespace Thea_Travel.View
 {
     public partial class MainPage : ContentPage
     {
         private Authenticator myAuthenticator;
-        private AppManager Manager;
+        private AppManagerViewModel Manager;
         public MainPage()
         {
             myAuthenticator = Authenticator.getAuthenticator();
@@ -67,7 +68,7 @@ namespace Thea_Travel.View
         }
         private async Task NavigateToMenu(IDataManager m)
         {
-            Manager = new AppManager(m);
+            Manager = new AppManagerViewModel(m);
             await Manager.initFeuillesDeRoute();
             Navigation.InsertPageBefore(new MenuPrincipal(Manager), this);
             await Navigation.PopAsync(true);

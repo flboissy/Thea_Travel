@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Thea_Travel.Data
 {
-    public class Journée : BindableObject, IJournée
+    public class Journée : IJournée
     {
         public DateTime DateDuJour
         {

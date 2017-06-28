@@ -13,12 +13,12 @@
                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"
                BackgroundColor="White">
         </Image>
-        <ListView x:Name="listViewFeuilles" ItemsSource="{Binding Feuilles}"  CachingStrategy="RecycleElement" ItemSelected="Selectionner_Feuille_De_Route" SeparatorColor="Black" SeparatorVisibility="Default" HasUnevenRows="True"
+        <ListView x:Name="listViewFeuilles" ItemsSource="{Binding FeuillesVM.UserFeuillesVM}"   CachingStrategy="RecycleElement" ItemTapped="listViewFeuilles_ItemTapped" SeparatorColor="Black" SeparatorVisibility="Default" HasUnevenRows="True"
                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0}"
                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}" 
                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
             <ListView.ItemTemplate>
-                <DataTemplate>²
+                <DataTemplate>
                     <views:CellViewFeuilleDeRoute TitreCell="{Binding Titre}" DebutCell="{Binding Debut}" FinCell="{Binding Fin}" Appearing="CellViewFeuilleDeRoute_Appearing"/>
                 </DataTemplate>
             </ListView.ItemTemplate>

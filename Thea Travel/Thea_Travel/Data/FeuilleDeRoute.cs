@@ -44,7 +44,12 @@ namespace Thea_Travel.Data
             journées.Add(j);
         }
 
-        public IVoyageur Voyageur { get; set; }
+        public IVoyageur Voyageur
+        {
+            get { return voyageur; }
+            set { voyageur = value; }
+        }
+        private IVoyageur voyageur;
 
         public ListeAdressesUtiles Adresses { get; }
 

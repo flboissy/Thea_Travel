@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Thea_Travel.Data;
 using Thea_Travel.Manager;
+using Thea_Travel.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,32 +11,16 @@ namespace Thea_Travel.View
 {
     public partial class ListeFeuilleDeRoute : ContentPage
     {
-        public ObservableCollection<IFeuilleDeRoute> Feuilles { get; set; }
-        public AppManager Manager;
+        public AppManagerViewModel Manager;
         private bool isPairRow = true;
-        public ListeFeuilleDeRoute(AppManager m)
+        public ListeFeuilleDeRoute(AppManagerViewModel m)
         {
             Manager = m;
-            Feuilles = new ObservableCollection<IFeuilleDeRoute>(Manager.lesFeuilles.Feuilles.Where(elt => 
-                                                                (elt.Voyageur.NomDeCompte == "|transphyto\\" + Authenticator.getAuthenticator().Username)
-                                                                &&
-                                                                (elt.Fin.CompareTo(DateTime.Today) > 0)
-                                                                ));
-            BindingContext = this;
+            BindingContext = Manager;
             InitializeComponent();
             NavigationPage.SetHasBackButton(this, true);
         }
-        private async void Selectionner_Feuille_De_Route(object sender, SelectedItemChangedEventArgs e)
-        {
-            if (e.SelectedItem == null)
-            {
-                return;
-            }
-            IFeuilleDeRoute fdr = e.SelectedItem as IFeuilleDeRoute;
-            await Navigation.PushAsync(new ListeJournees(fdr),true);
-            
-            listViewFeuilles.SelectedItem = null;
-        }
+
         private void CellViewFeuilleDeRoute_Appearing(object sender, EventArgs e)
         {
             var viewCell = sender as ViewCell;
@@ -54,6 +39,14 @@ namespace Thea_Travel.View
                 }
             }
             isPairRow = !isPairRow;
+        }
+
+        private async void listViewFeuilles_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            listViewFeuilles.ItemTapped -= listViewFeuilles_ItemTapped;
+            Manager.FeuillesVM.SelectedIndex = Manager.FeuillesVM.UserFeuillesVM.IndexOf(e.Item as FeuilleDeRouteViewModel);
+            await Navigation.PushAsync(new JournéesCarouselView(Manager));
+            listViewFeuilles.ItemTapped += listViewFeuilles_ItemTapped;
         }
     }
 }

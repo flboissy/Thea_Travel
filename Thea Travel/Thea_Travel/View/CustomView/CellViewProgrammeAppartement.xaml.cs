@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Thea_Travel.ViewModel;
 using Xamarin.Forms;
 
 namespace Thea_Travel.View.CustomView
@@ -19,7 +19,7 @@ namespace Thea_Travel.View.CustomView
         private void root_Appearing(object sender, EventArgs e)
         {
             var viewCell = sender as ViewCell;
-            isPairRow = (bool)App.Current.Properties[ListeProgrammes.IS_PAIR_KEY];
+            isPairRow = (bool)App.Current.Properties[AppManagerViewModel.IS_PAIR_KEY];
             if (isPairRow)
             {
                 if (viewCell.View != null)
@@ -34,7 +34,7 @@ namespace Thea_Travel.View.CustomView
                     viewCell.View.BackgroundColor = Color.FromHex("#ffffff");
                 }
             }
-            App.Current.Properties[ListeProgrammes.IS_PAIR_KEY] = !isPairRow;
+            App.Current.Properties[AppManagerViewModel.IS_PAIR_KEY] = !isPairRow;
         }
     }
 }

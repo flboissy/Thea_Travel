@@ -1,16 +1,17 @@
 ﻿using System;
 using Thea_Travel.Manager;
 using Thea_Travel.Services;
+using Thea_Travel.ViewModel;
 using Xamarin.Forms;
 
 namespace Thea_Travel.View
 {
     public partial class MenuPrincipal : ContentPage
     {
-        AppManager Manager;
+        AppManagerViewModel Manager;
         IPreferences Prefs;
         ICredentialsManager CredManager;
-        public MenuPrincipal(AppManager manager)
+        public MenuPrincipal(AppManagerViewModel manager)
         {
             Manager = manager;
             Prefs = DependencyService.Get<IPreferences>();

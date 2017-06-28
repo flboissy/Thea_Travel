@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior ="clr-namespace:Thea_Travel.Behavior"
+             xmlns:conv="clr-namespace:Thea_Travel.Converters"
+             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:local ="clr-namespace:Thea_Travel"
+             x:Class="Thea_Travel.View.JournéesCarouselView"
+             Title="{Binding SelectedJournée.DateDuJour, StringFormat='{0:d}'}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ProgrammeDataTemplateSelector x:Key="ProgrammeTemplateSelector"></local:ProgrammeDataTemplateSelector>
+            <conv:TappedItemEventArgsToTappedItemConverter x:Key="SelectedItemConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <cv:CarouselView ItemsSource="{Binding LesJournéesVM}" ItemSelected="CarouselView_ItemSelected">
+        <cv:CarouselView.ItemTemplate>
+            <DataTemplate>
+                <ListView x:Name="listViewProgrammes"
+                          ItemsSource="{Binding LesProgrammesVM}"
+                          ItemTemplate="{StaticResource ProgrammeTemplateSelector}"
+                          ItemSelected="listViewProgrammes_ItemSelected"
+                          SeparatorColor="Black" HasUnevenRows="True">
+                    <ListView.Behaviors>
+                        <behavior:ListViewItemTappedBehavior Command="{Binding ItemTappedCommand}" Converter="{StaticResource SelectedItemConverter}"/>
+                    </ListView.Behaviors>
+                </ListView>
+            </DataTemplate>
+        </cv:CarouselView.ItemTemplate>
+    </cv:CarouselView>
+</ContentPage>

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Thea_Travel.Data
+namespace Thea_Travel.Manager
 {
-    public interface IProgramme
+    class Manager
     {
-       Task ActionSheet();
+        
     }
 }

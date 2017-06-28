@@ -19,5 +19,6 @@ namespace Thea_Travel.Data
             return base.ToString();
         }
 
+        public abstract Task ActionSheet();
     }
 }

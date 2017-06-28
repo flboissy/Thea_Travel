@@ -39,10 +39,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Authenticator.cs" />
+    <Compile Include="Behavior\ListViewItemTappedBehavior.cs" />
+    <Compile Include="Converters\TappedItemEventArgsToTappedItemConverter .cs" />
     <Compile Include="Data\AdresseUtile.cs" />
     <Compile Include="Data\Filliale.cs" />
     <Compile Include="Data\Interface\IAdresseUtile.cs" />
     <Compile Include="Data\ListeAdressesUtiles.cs" />
+    <Compile Include="Manager\Manager.cs" />
     <Compile Include="PlatformCulture.cs" />
     <Compile Include="Ressources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -61,15 +64,21 @@
     </Compile>
     <Compile Include="Services\ILocalize.cs" />
     <Compile Include="TranslateExtension.cs" />
+    <Compile Include="ViewModel\AdresseUtileViewModel.cs" />
+    <Compile Include="ViewModel\AppManagerViewModel.cs" />
+    <Compile Include="ViewModel\FeuilleDeRouteViewModel.cs" />
     <Compile Include="ViewModel\JournéeViewModel.cs" />
     <Compile Include="Data\ListeFeuillesDeRoute.cs" />
     <Compile Include="Manager\DataManager\IDataManager.cs" />
     <Compile Include="ProgrammeDataTemplateSelector.cs" />
+    <Compile Include="ViewModel\ListeAdresseUtilesViewModel.cs" />
+    <Compile Include="ViewModel\ListeFeuillesDeRouteViewModel.cs" />
     <Compile Include="ViewModel\ProgrammeViewModel.cs" />
     <Compile Include="Services\ICredentialsManager.cs" />
     <Compile Include="Services\IDialer.cs" />
     <Compile Include="Services\ISaveAndLoad.cs" />
     <Compile Include="Services\IPreferences.cs" />
+    <Compile Include="ViewModel\VoyageurViewModel.cs" />
     <Compile Include="View\CustomView\CellViewAdresse.xaml.cs">
       <DependentUpon>CellViewAdresse.xaml</DependentUpon>
     </Compile>
@@ -107,11 +116,17 @@
     <Compile Include="View\CustomView\CellViewProgrammeHotel.xaml.cs">
       <DependentUpon>CellViewProgrammeHotel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\JournéesCarouselView.xaml.cs">
+      <DependentUpon>JournéesCarouselView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ListeFeuilleDeRoute.xaml.cs">
       <DependentUpon>ListeFeuilleDeRoute.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListeJournees.xaml.cs">
       <DependentUpon>ListeJournees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListeJournéeDetailCaroussel.xaml.cs">
+      <DependentUpon>ListeJournéeDetailCaroussel.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ListeProgrammes.xaml.cs">
       <DependentUpon>ListeProgrammes.xaml</DependentUpon>
@@ -260,6 +275,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\CustomView\CellViewAdresse.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\ListeJournéeDetailCaroussel.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MyMVVMToolkit\MyMVVMToolkit.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>MyMVVMToolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\JournéesCarouselView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
